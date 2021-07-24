@@ -3,7 +3,7 @@
 
 // Header File
 #include <stdio.h>
-
+int i = 0;
 
 char board[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 
@@ -41,6 +41,7 @@ int ChoiceCheck(int n)
 void Set(int n, char c)
 {
     board[n - 1] = c;
+    i++;
 }
 
 // CheckWin function is used to check the win condition
@@ -62,7 +63,7 @@ int CheckWin()
         return 1;
     else if (board[2] == board[4] && board[4] == board[6])
         return 1;
-    else
+    else 
         return 0;
 }
 
@@ -73,15 +74,16 @@ int main(void)
     printf("Palyer1 : X  and Player2 : O\n\n");
     DisplayBoard();
     int choice;
-
-    while (1)
+    do
     {
+        
     label1:
         printf("Player 1 , Enter Box no. : ");
         scanf("%d", &choice);
 
-    if (ChoiceCheck(choice))
+    if (ChoiceCheck(choice)){
         Set(choice, 'X');
+    }
     else
     {
         printf("Enter Valid Choice!!!!\n");
@@ -92,15 +94,27 @@ int main(void)
     if (CheckWin())
     {
         printf("Hurray!! Player1 Won.");
-        break;
+        return 0;
     }
+
+
+    //game draw condition 
+    //when all the 9 boxes are filled and win condition is still not occured 
+    //so its a draw
+    if (i==9)
+    {
+        printf("Game Draw!!!");
+        return 0;
+    }
+        
 
     label2:
         printf("Player 2 , Enter Box no. : ");
         scanf("%d", &choice);
 
-    if (ChoiceCheck(choice))
+    if (ChoiceCheck(choice)){
          Set(choice, 'O');
+    }
     else
     {
         printf("Enter Valid Choice!!!!\n");
@@ -111,9 +125,10 @@ int main(void)
     if (CheckWin())
     {
         printf("Hurray!! Player2 Won.");
-        break;
+        return 0;
     }
-    }
+    }while(i!=9);
+    printf("Game Draw!!!");
 
     return 0;
 }
