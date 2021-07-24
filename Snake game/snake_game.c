@@ -92,7 +92,7 @@ void input()
 // each movement
 void logic()
 {
-    sleep(0.001);
+    sleep(0.01);
     switch (flag)
     {
     case 1:
